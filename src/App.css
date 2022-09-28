@@ -5,7 +5,13 @@
 }
 h1 {
   color: #fff;
+  font-family: 'Courier New', Courier, monospace;
 }
 p {
   color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  background-color: black;
 }

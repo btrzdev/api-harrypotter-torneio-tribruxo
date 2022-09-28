@@ -1,13 +1,12 @@
-import "./styles.css";
 import { useState } from "react";
+import { CardStudent, CardStudentContainer, ImgStudent, ButtonStart, ReactContainer, Fields, ButtonContainer, FieldsContainer} from "./styles"
 
 function randomIntFromInterval(min, max) {
-  // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export default function Students({ studentsList }) {
-  console.log(studentsList);
+
   const [selectedStudents, setSelectedStudents] = useState([]);
 
   const raffleStudent = (selStudents) => {
@@ -23,6 +22,7 @@ export default function Students({ studentsList }) {
       randomIntFromInterval(0, availableStudents.length - 1)
     ];
   };
+  
   const [text, setText] = useState("Começar");
   const raffle = () => {
     let selStudents = [];
@@ -35,27 +35,27 @@ export default function Students({ studentsList }) {
   };
 
   return (
-    <div className="container">
-      <div className="button-container">
-        <button onClick={raffle}>{text}</button>
-      </div>
+    <ReactContainer>
+      <ButtonContainer>
+        <ButtonStart onClick={raffle}>{text}</ButtonStart>
+      </ButtonContainer>
       <div>
-        <div className="card-student-container">
+        <CardStudentContainer>
           {selectedStudents.map((student, index) => {
             return (
-              <div className="card-student">
-                <p key={index}>
-                  <span>Name:</span> {student.name}{" "}
-                </p>
-                <p>
-                  <span>House:</span> {student.house}
-                </p>
-                <img src={student.image} alt="" />
-              </div>
+              <CardStudent house={student.house}>
+                <FieldsContainer key={index}>
+                  <Fields>Nome:</Fields> {student.name}{" "}
+                </FieldsContainer>
+                <FieldsContainer>
+                  <Fields>Casa:</Fields> {student.house}
+                </FieldsContainer>
+                <ImgStudent src={student.image} alt="" />
+              </CardStudent>
             );
           })}
-        </div>
+        </CardStudentContainer>
       </div>
-    </div>
+    </ReactContainer>
   );
 }
